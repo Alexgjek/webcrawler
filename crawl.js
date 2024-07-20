@@ -1,5 +1,5 @@
 
-function normalizeURL(urlString){
+export function normalizeURL(urlString){
     const urlObject = new URL(urlString);
     const hostPath =  `${urlObject.hostname}${urlObject.pathname}`
     if (hostPath.length > 0 && hostPath.slice(-1) === '/'){
@@ -8,7 +8,6 @@ function normalizeURL(urlString){
     return hostPath
 }
 
+// export function getURLsFromHTML(htmlString){
 
-module.exports = {
-    normalizeURL
-}
+// }
