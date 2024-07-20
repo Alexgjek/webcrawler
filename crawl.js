@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom'
 
 export function normalizeURL(urlString){
     const urlObject = new URL(urlString);
@@ -8,6 +9,29 @@ export function normalizeURL(urlString){
     return hostPath
 }
 
-// export function getURLsFromHTML(htmlString){
+export function getURLsFromHTML(htmlBody, baseURL){
+    const urls = []
+    const dom = new JSDOM(htmlBody) // taking html as string and creating DOM
+    const linkElements = dom.window.document.querySelectorAll('a')
+    for (const linkElement of linkElements){
+        if (linkElement.href.slice(0,1) === '/') {
+            //relative url
+            try {
+                const urlObj = new URL(`${baseURL}${linkElement.href}`)
+                urls.push(urlObj.href)
+            } catch (error) {
+                console.log(`error with relative url: ${error.message}`)
+            }
+        } else {
+            // absolute
+            try {
+                const urlObj = new URL(`${linkElement.href}`)
+                urls.push(urlObj.href)
+            } catch (error) {
+                console.log(`error with absolute url: ${error.message}`)
+            }
+        }
+    }
+    return urls
 
-// }
+}
