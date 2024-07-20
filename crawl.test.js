@@ -65,3 +65,10 @@ test('getURLsFromHTML invalid', () => {
     const expected = []
     expect(actual).toEqual(expected)
 })
+
+test('crawlPage', () => {
+    const inputBaseURL = "https://blog.boot.dev"
+    const actual = getURLsFromHTML(inputBaseURL)
+    const expected = []
+    expect(actual).toEqual(expected)
+})

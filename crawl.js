@@ -33,5 +33,27 @@ export function getURLsFromHTML(htmlBody, baseURL){
         }
     }
     return urls
+}
+
+export async function crawlPage(baseURL) {
+   
+    try {
+        const response = await fetch(baseURL)
+
+        if (response.status > 399){
+            console.log(`error in fetch with status code: ${response.status} on page: ${baseURL}`)
+            return
+        }
+
+        const contentType = response.headers.get("content-type")
+        if (!contentType .includes("text/html")){
+            console.log(`non html response: ${contentType} on page: ${baseURL}`)
+            return
+        }
+
+        console.log(await response.text())
+    } catch (error) {
+        console.log(`error fetching page: ${error.message} on page ${baseURL}`)
+    }
 
 }
