@@ -75,7 +75,7 @@ export async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
     pages[normalizedCurrentURL] = 1
    
     try {
-        const response = await fetch(baseURL)
+        const response = await fetch(currentURL)
 
         if (response.status > 399){
             console.log(`error in fetch with status code: ${response.status} on page: ${baseURL}`)
